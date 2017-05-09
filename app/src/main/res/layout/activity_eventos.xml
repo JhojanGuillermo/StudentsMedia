@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="studentsmedia.app.tecsup.com.studentsmedia.activities.EventsActivity">
+
+    <LinearLayout
+        android:background="@color/colorPrimary"
+        android:id="@+id/ubicacion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/eleccion"
+            android:backgroundTint="@color/colorPress"
+            android:selectAllOnFocus="true"
+            android:text="Eventos"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textStyle="bold|italic" />
+
+        <Button
+            android:id="@+id/button_eventGal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/eleccion"
+            android:text="Galeria"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textStyle="bold|italic" />
+
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:paddingTop="6dp"
+        android:id="@+id/eventos_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/ubicacion" />
+</RelativeLayout>
