@@ -6,10 +6,17 @@
     android:layout_height="match_parent"
     tools:context="studentsmedia.app.tecsup.com.studentsmedia.activities.Galeria">
 
+    <TextView
+        android:id="@+id/titulo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Hola" />
+
     <GridView
         android:id="@+id/gridView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/titulo"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:columnWidth="100dp"
