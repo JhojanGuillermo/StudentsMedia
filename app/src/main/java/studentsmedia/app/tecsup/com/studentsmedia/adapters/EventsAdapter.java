@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import studentsmedia.app.tecsup.com.studentsmedia.R;
-import studentsmedia.app.tecsup.com.studentsmedia.activities.EventsActivity;
 import studentsmedia.app.tecsup.com.studentsmedia.models.Event;
 
 /**

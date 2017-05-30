@@ -1,6 +1,5 @@
 package studentsmedia.app.tecsup.com.studentsmedia.fragments;
 
-import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Rect;
 import android.os.Bundle;
@@ -11,13 +10,10 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import java.util.List;
 
 import studentsmedia.app.tecsup.com.studentsmedia.R;
-import studentsmedia.app.tecsup.com.studentsmedia.activities.EventsActivity;
-import studentsmedia.app.tecsup.com.studentsmedia.activities.EventsGalleryActivity;
 import studentsmedia.app.tecsup.com.studentsmedia.adapters.EventsAdapter;
 import studentsmedia.app.tecsup.com.studentsmedia.models.Event;
 import studentsmedia.app.tecsup.com.studentsmedia.repositories.EventRepository;

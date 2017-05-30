@@ -7,8 +7,6 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-import studentsmedia.app.tecsup.com.studentsmedia.activities.EventsActivity;
-
 /**
  * Created by JShanksX13 on 9/05/2017.
  */

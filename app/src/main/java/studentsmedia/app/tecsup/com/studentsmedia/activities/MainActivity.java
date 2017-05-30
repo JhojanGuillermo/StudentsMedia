@@ -1,11 +1,16 @@
 package studentsmedia.app.tecsup.com.studentsmedia.activities;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.GridView;
 
 import studentsmedia.app.tecsup.com.studentsmedia.R;
+import studentsmedia.app.tecsup.com.studentsmedia.adapters.ImageAdapter;
 import studentsmedia.app.tecsup.com.studentsmedia.adapters.MyFragmentStatePagerAdapter;
 import studentsmedia.app.tecsup.com.studentsmedia.fragments.EventsFragment;
 import studentsmedia.app.tecsup.com.studentsmedia.fragments.EventsGalleryFragment;
