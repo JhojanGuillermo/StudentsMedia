@@ -6,17 +6,100 @@
     android:layout_height="match_parent"
     tools:context="studentsmedia.app.tecsup.com.studentsmedia.activities.Galeria">
 
+    <RelativeLayout
+        android:id="@+id/sec_det"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/portada_img"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_imgportada"
+            android:maxHeight="30dp" />
+
+        <TextView
+            android:id="@+id/titulo_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/portada_img"
+            android:layout_marginLeft="12dp"
+            android:text="Detalles del evento"
+            android:textColor="#000dff"
+            android:textSize="22dp"
+
+            android:textStyle="bold" />
+
+        <RelativeLayout
+            android:id="@+id/realizar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/titulo_text"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="6dp">
+
+            <TextView
+                android:id="@+id/fecha"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_clock" />
+
+            <TextView
+                android:id="@+id/fechaText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/fecha"
+                android:textSize="14dp"
+                android:textStyle="italic"
+                android:layout_marginBottom="2dp"
+                android:text=" Fecha"/>
+
+            <TextView
+                android:id="@+id/lugar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/fechaText"
+                android:drawableLeft="@drawable/ic_location"
+                />
+
+            <TextView
+                android:id="@+id/lugarText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/lugar"
+                android:layout_below="@+id/fechaText"
+                android:layout_marginTop="3dp"
+                android:textSize="14dp"
+                android:textStyle="italic"
+                android:text="Lugar"/>
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/descripcion_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/realizar"
+            android:layout_marginBottom="14dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="14dp"
+            android:text="Descripcion" />
+
+    </RelativeLayout>
+
     <TextView
-        android:id="@+id/titulo"
+        android:id="@+id/tit_galeria"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hola" />
+        android:layout_below="@+id/sec_det"
+        android:layout_marginBottom="8dp"
+        android:gravity="center"
+        android:text="GALERIA" />
 
     <GridView
         android:id="@+id/gridView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/titulo"
+        android:layout_below="@+id/tit_galeria"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:columnWidth="100dp"

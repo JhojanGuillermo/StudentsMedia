@@ -13,7 +13,16 @@ import studentsmedia.app.tecsup.com.studentsmedia.adapters.ImageAdapter;
 
 public class Galeria extends AppCompatActivity {
 
-    private int id;
+    //private int id;
+    private String fullname;
+
+    private String fecha;
+
+    private String lugar;
+
+    private String descripcion;
+
+    //private String picture;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,14 +31,26 @@ public class Galeria extends AppCompatActivity {
 
         if (this.getIntent().getExtras() != null){
             Bundle bundle = this.getIntent().getExtras();
-            id = bundle.getInt("ID");
+            //id = bundle.getInt("ID");
+            fullname = bundle.getString("TituloEvent");
+            fecha = bundle.getString("FechaEvent");
+            lugar = bundle.getString("LugarEvent");
+            descripcion = bundle.getString("DescEvent");
+            //picture = bundle.getString("ImageEvent");
         }
 
         //llamara al servicio por ID o buscar en tu lista el objeto por ese ID
         //Galeria de fotos
-        TextView textView = (TextView) findViewById(R.id.titulo);
+        TextView titEvent = (TextView) findViewById(R.id.titulo_text);
+            titEvent.setText(fullname);
+        TextView fechEvent = (TextView) findViewById(R.id.fechaText);
+            fechEvent.setText(fecha);
+        TextView lugEvent = (TextView) findViewById(R.id.lugarText);
+            lugEvent.setText(lugar);
+        TextView descEvent = (TextView) findViewById(R.id.descripcion_text);
+            descEvent.setText(descripcion);
         GridView gridView = (GridView) findViewById(R.id.gridView);
-        textView.setText("Galeria " + id);
+        //textView.setText("Galeria " + id);
 
         gridView.setAdapter(new ImageAdapter(this));
 

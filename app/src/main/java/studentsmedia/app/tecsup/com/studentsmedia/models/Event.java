@@ -14,13 +14,16 @@ public class Event {
 
     private String lugar;
 
+    private String descripcion;
+
     private String picture;
 
-    public Event(Integer id, String fullname, String fecha, String lugar, String picture){
+    public Event(Integer id, String fullname, String fecha, String lugar,String descripcion, String picture){
         this.id = id;
         this.fullname = fullname;
         this.fecha = fecha;
         this.lugar = lugar;
+        this.descripcion = descripcion;
         this.picture = picture;
     }
 
@@ -55,6 +58,10 @@ public class Event {
         this.lugar = lugar;
     }
 
+    public String getDescripcion(){ return descripcion; }
+
+    public void setDescripcion(String descripcion) { this.descripcion = descripcion;}
+
     public String getPicture() {
         return picture;
     }
@@ -70,6 +77,7 @@ public class Event {
                 ", fullname='" + fullname + '\'' +
                 ", fecha='" + fecha + '\'' +
                 ", lugar='" + lugar + '\'' +
+                ", descripcion= '" + descripcion + '\'' +
                 ", picture='" + picture + '\'' +
                 '}';
     }

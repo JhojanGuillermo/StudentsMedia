@@ -16,8 +16,8 @@ public class EventRepository {
 
     static {
         events = new ArrayList<>();
-        events.add( new Event(100, "Fiesta de Inauguracion", "16/04/2017", "Tecsup", "fiesta") );
-        events.add( new Event(200, "Bienvenida a Cachimbos", "10/03/2017", "Tecsup", "bienvenida") );
+        events.add( new Event(100, "Fiesta de Inauguracion", "16/04/2017", "Tecsup","asdasdasd", "fiesta") );
+        events.add( new Event(200, "Bienvenida a Cachimbos", "10/03/2017", "Tecsup","asdsadsddd", "bienvenida") );
 
     }
 
