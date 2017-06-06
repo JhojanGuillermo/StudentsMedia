@@ -21,8 +21,17 @@ public class EventRepository {
 
     }
 
-    public static List<Event> getEvents() {
+    public static List<Event> listEvents() {
         return events;
+    }
+
+    public static Event getEvents(int id) {
+        for (Event event : events) {
+            if (event.getId() == id) {
+                return event;
+            }
+        }
+        return null;
     }
 
     //Galeria

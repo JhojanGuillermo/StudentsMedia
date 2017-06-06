@@ -28,10 +28,14 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
 
     private List<Event> events;
 
-    public EventsAdapter(EventsFragment eventsFragment, List<Event> events) {this.events = new ArrayList<>(); }
+    public EventsAdapter(EventsFragment eventsFragment, List<Event> events) {
+        this.events = new ArrayList<>();
+    }
 
-    public EventsAdapter(Activity activity, List<Event> events) {this.events = events; this.activity = activity;}
-
+    public EventsAdapter(Activity activity, List<Event> events) {
+        this.events = events;
+        this.activity = activity;
+    }
 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -42,7 +46,7 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
         public TextView lugar;
         public TextView descripcion;
 
-        public ViewHolder(View itemView){
+        public ViewHolder(View itemView) {
             super(itemView);
             picture = (ImageView) itemView.findViewById(R.id.picture_image);
             fullname = (TextView) itemView.findViewById(R.id.fullname_text);
@@ -72,17 +76,18 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
         viewHolder.picture.setImageResource(idRes);
 
         //ver su respectivo detalle
-        viewHolder.itemView.setOnClickListener(new View.OnClickListener(){
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(activity, Galeria.class);
 
-                    intent.putExtra("TituloEvent", event.getFullname())
-                            .putExtra("FechaEvent", event.getFecha())
-                            .putExtra("LugarEvent", event.getLugar())
-                            .putExtra("DescEvent", event.getDescripcion());
-                    activity.startActivity(intent);
+                intent.putExtra("ID", event.getId());
+//                intent.putExtra("TituloEvent", event.getFullname())
+//                        .putExtra("FechaEvent", event.getFecha())
+//                        .putExtra("LugarEvent", event.getLugar())
+//                        .putExtra("DescEvent", event.getDescripcion());
+                activity.startActivity(intent);
             }
         });
     }

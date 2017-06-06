@@ -33,7 +33,7 @@ public class EventsFragment extends Fragment {
         eventsList.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         eventsList.addItemDecoration(new EventsFragment.GridSpacingItemDecoration(2, dpToPx(10), true));
 
-        List<Event> events = EventRepository.getEvents();
+        List<Event> events = EventRepository.listEvents();
         eventsList.setAdapter(new EventsAdapter(this.getActivity(), events));
 
         return view;
