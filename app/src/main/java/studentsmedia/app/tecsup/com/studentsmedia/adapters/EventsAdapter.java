@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -72,8 +74,10 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
         viewHolder.lugar.setText(event.getLugar());
 
         Context context = viewHolder.itemView.getContext();
-        int idRes = context.getResources().getIdentifier(event.getImagen(), "drawable", context.getPackageName());
-        viewHolder.picture.setImageResource(idRes);
+//        int idRes = context.getResources().getIdentifier(event.getImagen(), "drawable", context.getPackageName());
+//        viewHolder.picture.setImageResource(idRes);
+
+        Picasso.with(context).load("https://usuarios-api-martincs27.c9users.io/images/eventos/"+ event.getImagen()).into(viewHolder.picture);
 
         //ver su respectivo detalle
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {

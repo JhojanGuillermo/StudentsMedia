@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         // Añadimos un layout Adapter al ViewPager
         MyFragmentStatePagerAdapter adapter = new MyFragmentStatePagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new EventsFragment(), "EVENTOS");
-        adapter.addFragment(new EventsGalleryFragment(), "GALERIA");
+        adapter.addFragment(new EventsGalleryFragment(), "FECHAS");
         viewPager.setAdapter(adapter);
 
         // Añadimos íconos y ocultamos el texto al tabLayout
