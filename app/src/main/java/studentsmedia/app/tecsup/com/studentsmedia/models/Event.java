@@ -8,7 +8,7 @@ public class Event {
 
     private Integer id;
 
-    private String fullname;
+    private String titulo;
 
     private String fecha;
 
@@ -16,16 +16,18 @@ public class Event {
 
     private String descripcion;
 
-    private String picture;
+    private String imagen;
 
-    public Event(Integer id, String fullname, String fecha, String lugar,String descripcion, String picture){
+    public Event(Integer id, String titulo, String fecha, String lugar,String descripcion, String imagen){
         this.id = id;
-        this.fullname = fullname;
+        this.titulo = titulo;
         this.fecha = fecha;
         this.lugar = lugar;
         this.descripcion = descripcion;
-        this.picture = picture;
+        this.imagen = imagen;
     }
+
+
 
     public Integer getId() {
         return id;
@@ -35,11 +37,11 @@ public class Event {
         this.id = id;
     }
 
-    public String getFullname(){
-        return fullname;
+    public String getTitulo(){
+        return titulo;
     }
-    public void setFullname(String fullname) {
-        this.fullname = fullname;
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
     }
 
     public String getFecha() {
@@ -62,23 +64,23 @@ public class Event {
 
     public void setDescripcion(String descripcion) { this.descripcion = descripcion;}
 
-    public String getPicture() {
-        return picture;
+    public String getImagen() {
+        return imagen;
     }
 
-    public void setPicture(String picture) {
-        this.picture = picture;
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
 
     @Override
     public String toString() {
         return "Event{" +
                 "id=" + id +
-                ", fullname='" + fullname + '\'' +
+                ", titulo='" + titulo + '\'' +
                 ", fecha='" + fecha + '\'' +
                 ", lugar='" + lugar + '\'' +
                 ", descripcion= '" + descripcion + '\'' +
-                ", picture='" + picture + '\'' +
+                ", imagen='" + imagen + '\'' +
                 '}';
     }
 

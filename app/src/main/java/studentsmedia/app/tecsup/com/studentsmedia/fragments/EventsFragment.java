@@ -6,19 +6,29 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import studentsmedia.app.tecsup.com.studentsmedia.ApiService;
+import studentsmedia.app.tecsup.com.studentsmedia.ApiServiceGenerator;
 import studentsmedia.app.tecsup.com.studentsmedia.R;
 import studentsmedia.app.tecsup.com.studentsmedia.adapters.EventsAdapter;
 import studentsmedia.app.tecsup.com.studentsmedia.models.Event;
 import studentsmedia.app.tecsup.com.studentsmedia.repositories.EventRepository;
 
 public class EventsFragment extends Fragment {
+
+    private static final String TAG = EventsFragment.class.getSimpleName();
 
     private RecyclerView eventsList;
 
@@ -33,10 +43,13 @@ public class EventsFragment extends Fragment {
         eventsList.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         eventsList.addItemDecoration(new EventsFragment.GridSpacingItemDecoration(2, dpToPx(10), true));
 
-        List<Event> events = EventRepository.listEvents();
-        eventsList.setAdapter(new EventsAdapter(this.getActivity(), events));
+        //List<Event> events = EventRepository.listEvents();
+        eventsList.setAdapter(new EventsAdapter(this.getActivity(), new ArrayList<Event>()));
+
+        initialize();
 
         return view;
+
     }
 
     public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
@@ -80,6 +93,50 @@ public class EventsFragment extends Fragment {
     private int dpToPx(int dp) {
         Resources r = getResources();
         return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
+    }
+    private void initialize() {
+
+        ApiService service = ApiServiceGenerator.createService(ApiService.class);
+
+        Call<List<Event>> call = service.listEvent();
+
+        call.enqueue(new Callback<List<Event>>() {
+            @Override
+            public void onResponse(Call<List<Event>> call, Response<List<Event>> response) {
+                try {
+
+                    int statusCode = response.code();
+                    Log.d(TAG, "HTTP status code: " + statusCode);
+
+                    if (response.isSuccessful()) {
+
+                        List<Event> events = response.body();
+                        Log.d(TAG, "eventos: " + events);
+
+                        EventsAdapter adapter = (EventsAdapter) eventsList.getAdapter();
+                        adapter.setEvents(events);
+                        adapter.notifyDataSetChanged();
+
+                    } else {
+                        Log.e(TAG, "onError: " + response.errorBody().string());
+                        throw new Exception("Error en el servicio");
+                    }
+
+                } catch (Throwable t) {
+                    try {
+                        Log.e(TAG, "onThrowable: " + t.toString(), t);
+                        Toast.makeText(EventsFragment.this.getActivity(), t.getMessage(), Toast.LENGTH_LONG).show();
+                    }catch (Throwable x){}
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Event>> call, Throwable t) {
+                Log.e(TAG, "onFailure: " + t.toString());
+                Toast.makeText(EventsFragment.this.getActivity(), t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+
+        });
     }
 
 }

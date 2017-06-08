@@ -3,21 +3,32 @@ package studentsmedia.app.tecsup.com.studentsmedia.activities;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import studentsmedia.app.tecsup.com.studentsmedia.ApiService;
+import studentsmedia.app.tecsup.com.studentsmedia.ApiServiceGenerator;
 import studentsmedia.app.tecsup.com.studentsmedia.R;
 import studentsmedia.app.tecsup.com.studentsmedia.adapters.ImageAdapter;
 import studentsmedia.app.tecsup.com.studentsmedia.models.Event;
-import studentsmedia.app.tecsup.com.studentsmedia.repositories.EventRepository;
 
 public class Galeria extends AppCompatActivity {
 
+    private static final String TAG = Galeria.class.getSimpleName();
+
+
     private int id;
-    private String fullname;
+    private String titulo;
 
     private String fecha;
 
@@ -25,7 +36,7 @@ public class Galeria extends AppCompatActivity {
 
     private String descripcion;
 
-    private String picture;
+    private String imagen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,21 +68,17 @@ public class Galeria extends AppCompatActivity {
 
         gridView.setAdapter(new ImageAdapter(this));
 
-        Event event = EventRepository.getEvents(id);
-        TextView titEvent = (TextView) findViewById(R.id.titulo_text);
-            titEvent.setText(event.getFullname());
-        TextView fechEvent = (TextView) findViewById(R.id.fechaText);
-            fechEvent.setText(event.getFecha());
-        TextView lugEvent = (TextView) findViewById(R.id.lugarText);
-            lugEvent.setText(event.getLugar());
-        TextView descEvent = (TextView) findViewById(R.id.descripcion_text);
-            descEvent.setText(event.getDescripcion());
-        ImageView img = (ImageView) findViewById(R.id.portada_img);
-        int idPortada = this.getResources().getIdentifier(event.getPicture(), "drawable", this.getPackageName());
-        img.setImageResource(idPortada);
-
-
-
+//        TextView titEvent = (TextView) findViewById(R.id.titulo_text);
+//            titEvent.setText(event.getTitulo());
+//        TextView fechEvent = (TextView) findViewById(R.id.fechaText);
+//            fechEvent.setText(event.getFecha());
+//        TextView lugEvent = (TextView) findViewById(R.id.lugarText);
+//            lugEvent.setText(event.getLugar());
+//        TextView descEvent = (TextView) findViewById(R.id.descripcion_text);
+//            descEvent.setText(event.getDescripcion());
+//        ImageView img = (ImageView) findViewById(R.id.portada_img);
+//        int idPortada = this.getResources().getIdentifier(event.getImagen(), "drawable", this.getPackageName());
+//        img.setImageResource(idPortada);
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -81,5 +88,63 @@ public class Galeria extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+        initialize();
     }
+    private void initialize() {
+
+        ApiService service = ApiServiceGenerator.createService(ApiService.class);
+
+        Call<Event> call = service.getEvent(id);
+
+        call.enqueue(new Callback<Event>() {
+            @Override
+            public void onResponse(Call<Event> call, Response<Event> response) {
+                try {
+
+                    int statusCode = response.code();
+                    Log.d(TAG, "HTTP status code: " + statusCode);
+
+                    if (response.isSuccessful()) {
+
+                        Event event = response.body();
+                        Log.d(TAG, "eventos: " + event);
+
+                        //Noticia noticia = NoticiaRepository.getNoticias(id);
+
+                        TextView titEvent = (TextView) findViewById(R.id.titulo_text);
+                        titEvent.setText(event.getTitulo());
+                        TextView fechEvent = (TextView) findViewById(R.id.fechaText);
+                        fechEvent.setText(event.getFecha());
+                        ImageView img = (ImageView) findViewById(R.id.portada_img);
+                        Picasso.with(Galeria.this).load("https://usuarios-api-martincs27.c9users.io/images/eventos/"+ event.getImagen()).into(img);
+                        TextView lugEvent = (TextView) findViewById(R.id.lugarText);
+                        lugEvent.setText(event.getLugar());
+                        TextView descEvent = (TextView) findViewById(R.id.descripcion_text);
+                        descEvent.setText(event.getDescripcion());
+
+                    } else {
+                        Log.e(TAG, "onError: " + response.errorBody().string());
+                        throw new Exception("Error en el servicio");
+                    }
+
+                } catch (Throwable t) {
+                    try {
+                        Log.e(TAG, "onThrowable: " + t.toString(), t);
+                        Toast.makeText(Galeria.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                    }catch (Throwable x){}
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Event> call, Throwable t) {
+                Log.e(TAG, "onFailure: " + t.toString());
+                Toast.makeText(Galeria.this, t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+
+        });
+    }
+
 }
+
+

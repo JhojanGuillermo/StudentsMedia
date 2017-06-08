@@ -37,6 +37,9 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
         this.activity = activity;
     }
 
+    public void setEvents(List<Event> events){
+        this.events = events;
+    }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -44,7 +47,6 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
         public TextView fullname;
         public TextView fecha;
         public TextView lugar;
-        public TextView descripcion;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -52,7 +54,6 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
             fullname = (TextView) itemView.findViewById(R.id.fullname_text);
             fecha = (TextView) itemView.findViewById(R.id.fecha_text);
             lugar = (TextView) itemView.findViewById(R.id.lugar_text);
-            descripcion = (TextView) itemView.findViewById(R.id.descripcion_text);
         }
     }
 
@@ -66,13 +67,12 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
     @Override
     public void onBindViewHolder(EventsAdapter.ViewHolder viewHolder, final int position) {
         final Event event = this.events.get(position);
-        viewHolder.fullname.setText(event.getFullname());
+        viewHolder.fullname.setText(event.getTitulo());
         viewHolder.fecha.setText(event.getFecha());
         viewHolder.lugar.setText(event.getLugar());
-        viewHolder.descripcion.setText(event.getDescripcion());
 
         Context context = viewHolder.itemView.getContext();
-        int idRes = context.getResources().getIdentifier(event.getPicture(), "drawable", context.getPackageName());
+        int idRes = context.getResources().getIdentifier(event.getImagen(), "drawable", context.getPackageName());
         viewHolder.picture.setImageResource(idRes);
 
         //ver su respectivo detalle
@@ -83,7 +83,7 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
                 Intent intent = new Intent(activity, Galeria.class);
 
                 intent.putExtra("ID", event.getId());
-//                intent.putExtra("TituloEvent", event.getFullname())
+//                intent.putExtra("TituloEvent", event.getTitulo())
 //                        .putExtra("FechaEvent", event.getFecha())
 //                        .putExtra("LugarEvent", event.getLugar())
 //                        .putExtra("DescEvent", event.getDescripcion());
